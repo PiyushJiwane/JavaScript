@@ -35,7 +35,33 @@
     showData();
  }
 
- function searchText(){
+ const log = document.getElementById('search');
+
+log.addEventListener('input', updateValue);
+
+function updateValue(e) {
+   var html="";
     let arrList=JSON.parse(localStorage.getItem("data"));
-    
- }
+    arrList.forEach(function(item,index){
+       if(item.includes(e.target.value)){
+         html+=`<div class="card" style="width: 15rem;text-align: center; display:inline-block;"><p><div class="card-block"><h4 class="card-title">Note ${index+1}</h4><p class="card-text">${item}</p><a id=${index} onclick="deleteNote(this.id)" class="btn btn-primary">Delete Note</a></div></p></div>`;
+       }
+    });
+    document.getElementById("noteList").innerHTML=html;
+}
+
+//  function searchText(){
+//     var html="";
+//     var txt=(document.getElementById("search").value).trim();
+//     if(txt==null){
+//        showData();
+//     }
+//     let arrList=JSON.parse(localStorage.getItem("data"));
+//     console.log(txt);
+//     arrList.forEach(function(item,index){
+//        if(item.includes(txt)){
+//          html+=`<div class="card" style="width: 15rem;text-align: center; display:inline-block;"><p><div class="card-block"><h4 class="card-title">Note ${index+1}</h4><p class="card-text">${item}</p><a id=${index} onclick="deleteNote(this.id)" class="btn btn-primary">Delete Note</a></div></p></div>`;
+//        }
+//     });
+//     document.getElementById("noteList").innerHTML=html;
+//  }
